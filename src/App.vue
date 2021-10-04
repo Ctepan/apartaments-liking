@@ -5,7 +5,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue'
+import { computed, defineComponent } from 'vue'
+import { useStore } from '@/store'
 import ApartmentCard from './components/ApartmentCard.vue'
 
 export default defineComponent({
@@ -14,9 +15,10 @@ export default defineComponent({
     ApartmentCard
   },
   setup() {
-    const apartments = ref([])
+    const store = useStore()
+    const apartments = computed(() => store.state.apartments)
 
-    onMounted(async () => { apartments.value = await fetch('/entities.json').then(x => x.json()) })
+    store.dispatch('updateApartments')
 
     return {
       apartments
