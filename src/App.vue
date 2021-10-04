@@ -1,16 +1,26 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div>
+    <ApartmentCard/>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
+import { defineComponent, onMounted, ref } from 'vue'
+import ApartmentCard from './components/ApartmentCard.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
+    ApartmentCard
+  },
+  setup() {
+    const apartments = ref([])
+
+    onMounted(async () => { apartments.value = await fetch('/entities.json').then(x => x.json()) })
+
+    return {
+      apartments
+    }
   }
 })
 </script>
