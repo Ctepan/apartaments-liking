@@ -1,16 +1,21 @@
 <template>
   <div class="apartment-card">
     <div class="apartment-card__title">
-      3-х комнатная на Минской
+      {{ title }}
     </div>
     <div class="apartment-card__info">
-      <div class="apartment-card__info-item">Минская 3а</div>
-      <div class="apartment-card__info-item">кв 123</div>
-      <div class="apartment-card__info-item">134 м²</div>
+      <div
+        v-for="item in info"
+        :key="item"
+        class="apartment-card__info-item"
+      >
+        {{ item }}
+      </div>
     </div>
+
     <PersonLink
       class="apartment-card__seller"
-      name="Василий Михайлович Дроздов"
+      :name="seller"
     />
 
     <LikeButton
@@ -40,6 +45,18 @@ export default defineComponent({
     liked: {
       type: Boolean,
       default: false
+    },
+    title: {
+      type: String,
+      required: true
+    },
+    seller: {
+      type: String,
+      default: ''
+    },
+    info: {
+      type: Array,
+      default: () => []
     }
   },
   setup(props, { emit }) {
@@ -71,16 +88,18 @@ export default defineComponent({
 
   &__info {
     display: flex;
+    flex-flow: row wrap;
     margin-top: 8px;
     font-size: 16px;
     line-height: 19px;
   }
 
   &__info-item {
-    margin-left: 16px;
+    margin-right: 16px;
+    white-space: nowrap;
 
-    &:first-child {
-      margin-left: 0;
+    &:last-child {
+      margin-right: 0;
     }
   }
 

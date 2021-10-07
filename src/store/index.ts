@@ -2,7 +2,7 @@ import { InjectionKey } from 'vue'
 import { createStore, Store, useStore as baseUseStore } from 'vuex'
 import { IApartment } from '@/core/entities'
 
-interface State {
+export interface State {
   apartments: IApartment[]
   likedApartments: number[]
 }

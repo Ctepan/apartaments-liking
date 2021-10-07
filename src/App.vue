@@ -1,8 +1,13 @@
 <template>
   <div>
     <ApartmentCard
-      :id="1"
-      :liked="isLiked(1)"
+      v-for="apartment in apartments"
+      :key="apartment.id"
+      :id="apartment.id"
+      :liked="isLiked(apartment.id)"
+      :title="apartment.title"
+      :info="apartment.info"
+      :seller="apartment.seller"
       @like:toggle="handleApartmentLikeToggle"
     />
   </div>
@@ -12,6 +17,7 @@
 import { computed, defineComponent } from 'vue'
 import { useStore } from '@/store'
 import ApartmentCard from '@/components/ApartmentCard.vue'
+import { IAddress, IPerson, IApartment } from '@/core/entities'
 
 export default defineComponent({
   name: 'App',
@@ -20,10 +26,33 @@ export default defineComponent({
   },
   setup() {
     const store = useStore()
-    const apartments = computed(() => store.state.apartments)
+    const apartmentsData = computed(() => store.state.apartments)
     const liked = computed(() => store.state.likedApartments)
 
     store.dispatch('updateApartments')
+
+    const apartments = computed(() => apartmentsData.value.map(x => ({
+      id: x.id,
+      title: x.attributes.title,
+      seller: getFullName(x.relationships),
+      info: [getFullAddress(x.attributes.address), getFullArea(x), getRoomsInfo(x)]
+    })))
+
+    function getFullName(person: IPerson) {
+      return `${person.attributes.last_name} ${person.attributes.first_name} ${person.attributes.middle_name}`
+    }
+
+    function getFullAddress(address: IAddress) {
+      return `${address.city} ${address.street}, ${address.house}к${address.room}`
+    }
+
+    function getFullArea(apartment: IApartment) {
+      return `${apartment.attributes.area} ${apartment.attributes.unit}`
+    }
+
+    function getRoomsInfo(apartment: IApartment) {
+      return `К-во комнат: ${apartment.attributes.rooms}`
+    }
 
     function isLiked(id: number) {
       return liked.value.includes(id)

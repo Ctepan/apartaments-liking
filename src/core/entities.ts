@@ -1,11 +1,11 @@
-interface IAddress {
+export interface IAddress {
   city: string
   street: string
   house: string
   room: string
 }
 
-interface IPerson {
+export interface IPerson {
   type: string
   id: number
   attributes: {
