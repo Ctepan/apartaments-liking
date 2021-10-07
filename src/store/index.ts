@@ -11,7 +11,7 @@ export default createStore<State>({
   state: {
     apartments: [],
     likedApartments: []
-  },
+  } as State,
   mutations: {
     setApartments(state, payload: IApartment[]) {
       state.apartments = payload
