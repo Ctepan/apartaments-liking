@@ -76,6 +76,7 @@ export default defineComponent({
   min-width: 240px;
   padding: 16px;
   display: block;
+  box-sizing: border-box;
   background: white;
   border-radius: 16px;
   position: relative;
