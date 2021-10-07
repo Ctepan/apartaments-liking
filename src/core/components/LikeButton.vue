@@ -32,6 +32,7 @@ export default defineComponent({
    height: 36px;
    border-radius: 50%;
    background: #0005;
+  cursor: pointer;
 
   &__icon {
     color: white;
