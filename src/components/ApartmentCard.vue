@@ -13,7 +13,11 @@
       name="Василий Михайлович Дроздов"
     />
 
-    <LikeButton class="apartment-card__like" />
+    <LikeButton
+      class="apartment-card__like"
+      :active="liked"
+      @click="handleLikeClick"
+    />
   </div>
 </template>
 
@@ -28,7 +32,25 @@ export default defineComponent({
     PersonLink,
     LikeButton
   },
-  props: {}
+  props: {
+    id: {
+      type: Number,
+      required: true
+    },
+    liked: {
+      type: Boolean,
+      default: false
+    }
+  },
+  setup(props, { emit }) {
+    function handleLikeClick() {
+      emit('like:toggle', props.id)
+    }
+
+    return {
+      handleLikeClick
+    }
+  }
 })
 </script>
 
