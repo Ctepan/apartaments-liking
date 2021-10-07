@@ -17,7 +17,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useStore } from '@/store'
-import ApartmentCard from '@/components/ApartmentCard.vue'
+import ApartmentCard from '@/core/components/ApartmentCard.vue'
 import { IAddress, IPerson, IApartment } from '@/core/entities'
 
 export default defineComponent({
