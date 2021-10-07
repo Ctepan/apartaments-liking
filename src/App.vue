@@ -7,7 +7,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useStore } from '@/store'
-import ApartmentCard from './components/ApartmentCard.vue'
+import ApartmentCard from '@/components/ApartmentCard.vue'
 
 export default defineComponent({
   name: 'App',
@@ -29,11 +29,19 @@ export default defineComponent({
 
 <style lang="scss">
 #app {
+  background: #777;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  width: 100%;
+  height: 100%;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
 </style>
