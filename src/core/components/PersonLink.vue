@@ -1,10 +1,8 @@
 <template>
   <div class="person-link">
-    <img
-      class="person-link__icon"
-      src="@/assets/icons/user-circle.svg"
-      alt=""
-    >
+    <svg class="person-link__icon" width="24" height="24" fill="currentColor">
+      <use width="24" height="24" href="@/assets/icons/person-circle.svg#icon" />
+    </svg>
     <span class="person-link__name">{{ name }}</span>
   </div>
 </template>
@@ -37,9 +35,6 @@ export default defineComponent({
   }
 
   &__icon {
-     color: currentColor;
-     height: 24px;
-     width: 24px;
      margin-right: 8px;
    }
 }
