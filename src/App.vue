@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="apartment-list">
     <ApartmentCard
       v-for="apartment in apartments"
+      class="apartment-list__item"
       :key="apartment.id"
       :id="apartment.id"
       :liked="isLiked(apartment.id)"
@@ -73,13 +74,29 @@ export default defineComponent({
 
 <style lang="scss">
 #app {
-  background: #777;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+.apartment-list {
+  margin: 0 auto;
+  padding: 0 8px;
   width: 100%;
-  height: 100%;
+  max-width: 960px;
+  box-sizing: border-box;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+  @media screen and (max-width: 600px){
+    grid-template-columns: 1fr;
+  }
+
+  &__item {
+    box-shadow: 0 1px 2px black;
+  }
 }
 
 body, html {
