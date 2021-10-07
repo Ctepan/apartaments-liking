@@ -1,6 +1,10 @@
 <template>
   <div>
-    <ApartmentCard/>
+    <ApartmentCard
+      :id="1"
+      :liked="isLiked(1)"
+      @like:toggle="handleApartmentLikeToggle"
+    />
   </div>
 </template>
 
@@ -17,11 +21,22 @@ export default defineComponent({
   setup() {
     const store = useStore()
     const apartments = computed(() => store.state.apartments)
+    const liked = computed(() => store.state.likedApartments)
 
     store.dispatch('updateApartments')
 
+    function isLiked(id: number) {
+      return liked.value.includes(id)
+    }
+
+    function handleApartmentLikeToggle(id: number) {
+      store.dispatch('toggleApartmentLike', id)
+    }
+
     return {
-      apartments
+      apartments,
+      isLiked,
+      handleApartmentLikeToggle
     }
   }
 })
