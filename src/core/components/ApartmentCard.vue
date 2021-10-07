@@ -13,10 +13,9 @@
       </div>
     </div>
 
-    <PersonLink
-      class="apartment-card__seller"
-      :name="seller"
-    />
+    <div class="apartment-card__footer">
+      <PersonLink :name="seller"/>
+    </div>
 
     <LikeButton
       class="apartment-card__like"
@@ -75,7 +74,8 @@ export default defineComponent({
 .apartment-card {
   min-width: 240px;
   padding: 16px;
-  display: block;
+  display: flex;
+  flex-flow: column;
   box-sizing: border-box;
   background: white;
   border-radius: 16px;
@@ -104,8 +104,9 @@ export default defineComponent({
     }
   }
 
-  &__seller {
-    margin-top: 24px;
+  &__footer {
+    margin-top: auto;
+    padding-top: 24px;
   }
 
   &__like {
